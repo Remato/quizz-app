@@ -18,7 +18,6 @@ export const Loading = styled(ActivityIndicator).attrs({
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
-  margin-top: 120px;
 `
 
 export const Title = styled.Text`
@@ -67,8 +66,7 @@ export const AnswerText = styled.Text`
 
 export const ButtonWrapper = styled.View<Props>`
   flex: 1;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center;
   align-items: center;
   margin-top: 128px;
 
