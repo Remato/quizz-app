@@ -1,5 +1,15 @@
 import styled from 'styled-components/native'
 import { ActivityIndicator } from 'react-native'
+import { BUTTON_VARIANT } from '../../utils/enums'
+
+type Props = {
+  variant: BUTTON_VARIANT
+}
+
+const getColor = ({ variant }: Props) => {
+  if (variant === BUTTON_VARIANT.CORRECT) return '#00ebec'
+  else if (variant === BUTTON_VARIANT.ERROR) return '#ff8686'
+}
 
 export const Loading = styled(ActivityIndicator).attrs({
   color: '#fff',
@@ -8,7 +18,7 @@ export const Loading = styled(ActivityIndicator).attrs({
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
-  justify-content: center;
+  margin-top: 120px;
 `
 
 export const Title = styled.Text`
@@ -53,4 +63,16 @@ export const AnswerText = styled.Text`
   font-size: 20px;
   color: #fff;
   text-decoration-color: #fff;
+`
+
+export const ButtonWrapper = styled.View<Props>`
+  flex: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-items: center;
+  margin-top: 128px;
+
+  background-color: ${(props) => getColor(props)};
+  border-top-right-radius: 32px;
+  border-top-left-radius: 32px;
 `
