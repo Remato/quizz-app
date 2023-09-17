@@ -1,9 +1,22 @@
 import { Answer } from '../../components'
-import { Wrapper, AnswerWrapper } from './styles'
+import {
+  Title,
+  Wrapper,
+  AnswerText,
+  QuestionText,
+  HighlightText,
+  AnswerWrapper,
+} from './styles'
 
-function Game() {
+type Props = {
+  exercises: Exercise[]
+}
+
+function Game({ exercises }: Props) {
   return (
     <Wrapper>
+      <Title>Fill in the missing word</Title>
+
       <AnswerWrapper>
         <Answer text="dsinda" />
         <Answer text="dsinda" />
