@@ -20,13 +20,17 @@ type Props = {
   current: number
   loading: boolean
   exercises: Exercise[]
+  onPressContinue(): void
 }
 
-function Game({ current, exercises, loading }: Props) {
+function Game({ current, exercises, loading, onPressContinue }: Props) {
   const [option, setOption] = useState(' _____')
   const [showAnswer, setShowAnswer] = useState(false)
   const [showButton, setShowButton] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [disabledAnswer, setDisabledAnswer] = useState(false)
+  const [buttonName, setButtonName] = useState('Check Answer')
+
   const [buttonType, setButtonType] = useState<BUTTON_VARIANT>(
     BUTTON_VARIANT.NORMAL,
   )
@@ -43,11 +47,23 @@ function Game({ current, exercises, loading }: Props) {
   }
 
   const checkAnswer = () => {
-    console.log(exercises[current].correct, selectedIndex)
+    setDisabledAnswer(true)
+    setButtonName('Continue')
 
     return exercises[current].correct === selectedIndex
       ? setButtonType(BUTTON_VARIANT.CORRECT)
       : setButtonType(BUTTON_VARIANT.ERROR)
+  }
+
+  const handleNextExercise = () => {
+    setOption(' _____')
+    setShowAnswer(false)
+    setShowButton(false)
+    setSelectedIndex(0)
+    setDisabledAnswer(false)
+    setButtonName('Check Answer')
+    setButtonType(BUTTON_VARIANT.NORMAL)
+    onPressContinue()
   }
 
   return (
@@ -76,20 +92,24 @@ function Game({ current, exercises, loading }: Props) {
 
           <AnswerWrapper>
             <Answer
+              disabled={disabledAnswer}
               text={exercises[current]?.answers[0]}
               onPress={() => handleOption(answers[0], 0)}
             />
             <Answer
+              disabled={disabledAnswer}
               text={exercises[current]?.answers[1]}
               onPress={() => handleOption(answers[1], 1)}
             />
           </AnswerWrapper>
           <AnswerWrapper>
             <Answer
+              disabled={disabledAnswer}
               text={exercises[current]?.answers[2]}
               onPress={() => handleOption(answers[2], 2)}
             />
             <Answer
+              disabled={disabledAnswer}
               text={exercises[current]?.answers[3]}
               onPress={() => handleOption(answers[3], 3)}
             />
@@ -98,9 +118,9 @@ function Game({ current, exercises, loading }: Props) {
           {showButton && (
             <ButtonWrapper variant={buttonType}>
               <Button
-                text="Check Answer"
+                text={buttonName}
                 variant={buttonType}
-                onPress={checkAnswer}
+                onPress={!disabledAnswer ? checkAnswer : handleNextExercise}
               />
             </ButtonWrapper>
           )}
