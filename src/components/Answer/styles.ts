@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const Wrapper = styled.View`
+export const Wrapper = styled.TouchableOpacity`
   background-color: #fff;
   padding: 16px;
   border-radius: 16px;

@@ -1,12 +1,13 @@
+import { TouchableOpacityProps } from 'react-native'
 import { Wrapper, Text } from './styles'
 
 type Props = {
-  text: string
-}
+  text?: string
+} & TouchableOpacityProps
 
-function Answer({ text }: Props) {
+function Answer({ text = '', ...rest }: Props) {
   return (
-    <Wrapper>
+    <Wrapper {...rest}>
       <Text>{text}</Text>
     </Wrapper>
   )
